@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: billay-kb-postgres
+    # Every value below is interpolated from .env when compose runs; this file holds no credential.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${DATABASE_NAME:-billay}
+      # The image refuses to start without it, so a missing value fails here, not later. ggignore
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    ports:
+      - "${DATABASE_PORT:-5432}:5432"
+    volumes:
+      - billay_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  billay_pgdata:

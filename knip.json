@@ -1,0 +1,28 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  },
+  "workspaces": {
+    ".": {
+      "entry": [
+        "scripts/*.ts",
+        "scenarios/*.ts",
+        "tests/**/*.test.ts"
+      ],
+      "project": [
+        "src/**/*.ts",
+        "scripts/**/*.ts",
+        "scenarios/**/*.ts",
+        "tests/**/*.ts"
+      ]
+    },
+    "web": {
+      "project": [
+        "src/**/*.{ts,tsx}",
+        "e2e/**/*.mjs"
+      ]
+    }
+  }
+}

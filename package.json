@@ -1,0 +1,51 @@
+{
+  "name": "billay-knowledge-base",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-learning knowledge base for the Billay invoice agent: reviewer feedback becomes reviewed, traceable memory for the next run.",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "web"
+  ],
+  "scripts": {
+    "dev": "tsx --env-file=.env src/server.ts",
+    "web": "npm run dev -w web",
+    "e2e": "node web/e2e/flow.mjs",
+    "migrate": "tsx --env-file=.env scripts/migrate.ts",
+    "seed": "tsx --env-file=.env scripts/seed.ts",
+    "db:reset": "tsx --env-file=.env scripts/reset.ts",
+    "promote": "tsx --env-file=.env scripts/promote.ts",
+    "scenario:1": "tsx --env-file=.env scenarios/1-correction-to-tenant-knowledge.ts",
+    "scenario:2": "tsx --env-file=.env scenarios/2-failed-and-rejected-runs.ts",
+    "scenario:3": "tsx --env-file=.env scenarios/3-review-edit-reject-disable.ts",
+    "scenario:4": "tsx --env-file=.env scenarios/4-global-promotion.ts",
+    "scenario:all": "npm run scenario:1 && npm run scenario:2 && npm run scenario:3 && npm run scenario:4",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p web",
+    "lint": "eslint .",
+    "deadcode": "knip",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run lint && npm run deadcode && npm test"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.80",
+    "@langchain/langgraph": "^0.2.74",
+    "fastify": "^5.12.5",
+    "pg": "^8.23.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.19.0",
+    "@types/pg": "^8.15.0",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "knip": "^6.39.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^2.1.9"
+  }
+}

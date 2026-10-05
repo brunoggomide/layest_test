@@ -1,0 +1,7 @@
+node_modules
+dist
+.env
+coverage
+web/e2e/screenshots
+# Interview preparation notes (Portuguese); not part of the deliverable.
+DEFENSE.md
